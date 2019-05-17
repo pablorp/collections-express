@@ -2,10 +2,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const booksRouter = require('./routes/books')
-const comicsRouter = require('./routes/comics')
-const gamesRouter = require('./routes/games')
-const tvRouter = require('./routes/tv')
 const collectionsRouter = require('./routes/collections')
 
 const PORT = process.env.PORT || 3000
