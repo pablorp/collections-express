@@ -4,9 +4,9 @@ Super barebones schemaless NoSQL document database for storing and querying data
 
 ## How to use
 
-**NPM install**
+**npm install**
 
-**NPM start**
+**npm start**
 *This will start a server on the port configured in process.env.PORT*
 
 ## Endpoints
