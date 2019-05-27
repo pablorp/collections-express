@@ -1,10 +1,10 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const routes = require('./routes')
-const router = express.Router();
+const router = express.Router()
 const mongo = require('mongodb').MongoClient
-var ObjectId = require('mongodb').ObjectID;
+var ObjectId = require('mongodb').ObjectID
+require('dotenv').config()
 
 const PORT = process.env.PORT || 3000
 const app = express()
@@ -18,7 +18,9 @@ let db = null
 let client = null
 
 async function initDB() {
-    client = await mongo.connect(process.env.DATABASE_URL)
+    client = await mongo.connect(process.env.DATABASE_URL, {
+        useNewUrlParser: true
+    })
     db = client.db('collections')
     metaCol = db.collection('meta')
     console.log('Conectado a BD')
@@ -61,6 +63,10 @@ async function deleteInCol(colName, id) {
 }
 
 //------------------------------------------------
+
+router.get('/', (req, res, next) => {
+    res.send('ok')
+})
 
 router.get('/:col', (req, res, next) => {
     getCol(req.params.col)
@@ -125,8 +131,6 @@ router.delete('/:col/:id', (req, res, next) => {
         })
 })
 
-
-
 //------------------------------------------------
 
 /*
@@ -141,12 +145,11 @@ app.use(function (req, res, next) {
 async function main() {
     await initDB()
 
-    app.use(process.env.BASE_URL, router);
+    app.use(process.env.BASE_URL, router)
 
     app.listen(PORT, () => {
-        console.log('app is running → PORT ' + PORT);
-    });
+        console.log('app is running → PORT ' + PORT)
+    })
 }
 
 main()
-
