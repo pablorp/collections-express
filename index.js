@@ -51,6 +51,9 @@ async function insertInCol(colName, obj) {
 }
 
 async function replaceInCol(colName, id, obj) {
+    if (obj._id) {
+        delete obj._id
+    }
     let dbCol = db.collection(colName)
     let res = await dbCol.replaceOne({ _id: new ObjectId(id) }, obj)
     return res
@@ -112,6 +115,7 @@ router.post('/:col', (req, res, next) => {
 
 router.put('/:col/:id', (req, res, next) => {
     let obj = req.body
+    console.log(obj)
     replaceInCol(req.params.col, req.params.id, obj)
         .then(col => {
             res.json(col)
