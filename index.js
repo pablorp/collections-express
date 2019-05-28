@@ -22,7 +22,6 @@ async function initDB() {
         useNewUrlParser: true
     })
     db = client.db('collections')
-    metaCol = db.collection('meta')
     console.log('Conectado a BD')
 }
 
